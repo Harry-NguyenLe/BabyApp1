@@ -2,7 +2,7 @@ package model;
 
 public class SongInfo {
     private String songTittle;
-    private int checked;
+    private boolean selected;
     private int songFile;
 
 
@@ -10,17 +10,15 @@ public class SongInfo {
 
     }
 
-
-
-    public SongInfo(String songTittle, int checked, int songFile) {
+    public SongInfo(String songTittle, boolean selected, int songFile) {
         this.songTittle = songTittle;
-        this.checked = checked;
+        this.selected = selected;
         this.songFile = songFile;
     }
 
-    public SongInfo(String songTittle, int checked) {
+    public SongInfo(String songTittle, boolean selected) {
         this.songTittle = songTittle;
-        this.checked = checked;
+        this.selected = selected;
     }
 
     public SongInfo(String songTittle) {
@@ -35,12 +33,12 @@ public class SongInfo {
         this.songTittle = songTittle;
     }
 
-    public int getChecked() {
-        return checked;
+    public boolean isSelected() {
+        return selected;
     }
 
-    public void setChecked(int checked) {
-        this.checked = checked;
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 
     public int getSongFile() {

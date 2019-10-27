@@ -271,7 +271,7 @@ public class UpdateAcitivity extends AppCompatActivity implements CommunicateFra
                     bundleCountDownTime.putString("routeName", edtRouteName.getText().toString());
                     bundleCountDownTime.putInt("routeID", routeID);
 
-//                    bundleCountDownTime.putString("songInfo", "soldier_alarm.mp3");
+//                    bundleCountDownTime.putString("songInfo", "Soldier Alarm.mp3");
                     intentCountDownTime.putExtra("bundleManual", bundleCountDownTime);
 
                     startActivityForResult(intentCountDownTime, REQ_CODE_COUNT_DOWN);

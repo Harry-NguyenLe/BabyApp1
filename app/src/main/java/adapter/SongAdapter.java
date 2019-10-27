@@ -8,9 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,7 +23,10 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongVH> {
     Context context;
     int layout;
     ArrayList<SongInfo> listSong;
-    MediaPlayer m;
+    public static MediaPlayer m;
+
+    private static CheckBox lastChecked = null;
+    private static int lastCheckedPos = 0;
 
 
     public SongAdapter(Context context, int layout, ArrayList<SongInfo> songInfos) {
@@ -49,41 +50,80 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongVH> {
         holder.tvSongTitle.setText(songInfo.getSongTittle());
 
 
-        //Get position where users click
-        if (listSong.get(holder.getAdapterPosition()).getChecked() == 1) {
-            holder.ckbSong.setChecked(true);
+//        //Get position where users click
+//        if (listSong.get(holder.getAdapterPosition()).getChecked() == 1) {
+//            holder.ckbSong.setChecked(true);
+//
+//        } else {
+//            holder.ckbSong.setChecked(false);
+//        }
+//
+//
+//        holder.ckbSong.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//                if (b) {
+//                    listSong.get(holder.getAdapterPosition()).setChecked(1);
+//                    songInfo.setChecked(1);
+//                    playBeep(songInfo.getSongTittle());
+//
+//                    SharedPreferences sharedPreferences = context.getSharedPreferences("Pref_Transfer_Time", Context.MODE_PRIVATE);
+//                    SharedPreferences.Editor editor = sharedPreferences.edit();
+//                    editor.putString("songInfo", songInfo.getSongTittle());
+//                    editor.apply();
+//
+//                    Toast.makeText(context, songInfo.getSongTittle(), Toast.LENGTH_SHORT).show();
+//
+//                } else {
+//                    if (m.isPlaying()) {
+//                        m.stop();
+//                        m.release();
+//                        m = new MediaPlayer();
+//                    }
+////                    Toast.makeText(context, "OKE", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
 
-        } else {
-            holder.ckbSong.setChecked(false);
+        holder.ckbSong.setChecked(listSong.get(position).isSelected());
+        holder.ckbSong.setTag(new Integer(position));
+
+        //for default check in first item
+        if (position == 0 && listSong.get(0).isSelected() && holder.ckbSong.isChecked()) {
+            lastChecked = holder.ckbSong;
+            lastCheckedPos = 0;
         }
 
-
-        holder.ckbSong.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        holder.ckbSong.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    listSong.get(holder.getAdapterPosition()).setChecked(1);
-                    songInfo.setChecked(1);
-                    playBeep(songInfo.getSongTittle());
+            public void onClick(View v) {
+                CheckBox cb = (CheckBox) v;
+                int clickedPos = ((Integer) cb.getTag()).intValue();
+
+                if (cb.isChecked()) {
+                    if (lastChecked != null) {
+                        lastChecked.setChecked(false);
+                        listSong.get(lastCheckedPos).setSelected(false);
+
+                    }
+
+                    lastChecked = cb;
+                    lastCheckedPos = clickedPos;
 
                     SharedPreferences sharedPreferences = context.getSharedPreferences("Pref_Transfer_Time", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("songInfo", songInfo.getSongTittle());
                     editor.apply();
 
-                    Toast.makeText(context, songInfo.getSongTittle(), Toast.LENGTH_SHORT).show();
+                    playBeep(songInfo.getSongTittle());
+                } else
+                    lastChecked = null;
 
-                } else {
-                    if (m.isPlaying()) {
-                        m.stop();
-                        m.release();
-                        m = new MediaPlayer();
-                    }
-//                    Toast.makeText(context, "OKE", Toast.LENGTH_SHORT).show();
-                }
+                listSong.get(clickedPos).setSelected(cb.isChecked());
             }
         });
     }
+
 
     @Override
     public int getItemCount() {
@@ -118,7 +158,6 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongVH> {
             m.setVolume(1f, 1f);
             m.setLooping(false);
             m.start();
-
 
 
         } catch (Exception e) {

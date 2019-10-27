@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,24 +30,24 @@ public class SongActivity extends AppCompatActivity {
     RecyclerView rvSong;
     SongAdapter songAdapter;
     ArrayList<SongInfo> listSong;
+    ImageButton imbBack;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_song);
+
         rvSong = findViewById(R.id.rvSong);
+        imbBack = findViewById(R.id.imbBack);
         listSong = new ArrayList<>();
 
-
-//        listSong.add(new SongInfo("Class of dream", 0, R.raw.classofdream));
-//        listSong.add(new SongInfo("Soldier Alarm", 0, R.raw.soldier_alarm));
-//
         songAdapter = new SongAdapter(SongActivity.this, R.layout.row_item_song, listSong);
         rvSong.setAdapter(songAdapter);
         rvSong.addItemDecoration(new SimpleDividerItemDecoration(SongActivity.this));
         rvSong.setLayoutManager(new LinearLayoutManager(SongActivity.this, RecyclerView.VERTICAL, false));
 
+        //Open asset folder and get song from it
         AssetManager assetManager = getAssets();
 
         try {
@@ -62,5 +63,16 @@ public class SongActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+    imbBack.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            SongAdapter.m.stop();
+            finish();
+        }
+    });
+
+
     }
+
+
 }

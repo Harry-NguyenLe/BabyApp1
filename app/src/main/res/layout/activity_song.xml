@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".SongActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -32,11 +33,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                android:fontFamily="@font/font_uvn_baisau"
                 android:text="Setting"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="25sp"
-                android:fontFamily="@font/font_uvn_baisau"
                 android:textStyle="italic" />
 
 
@@ -47,10 +48,37 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSong"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar"
+        android:layout_height="0dp"
+        android:layout_weight="8"
         android:background="@drawable/reclycler_music_background"
         android:dividerHeight="1dp"
         android:padding="10dp" />
 
-</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:background="@drawable/reclycler_music_background">
+
+        <TextView
+            android:id="@+id/tvCustomAlarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/font_uvn_baisau"
+            android:padding="10dp"
+            android:text="Custom Alarm By Harry Nguyen"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:textStyle="bold|italic" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvCustomAlarm"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_custom_logo" />
+
+    </RelativeLayout>
+
+</LinearLayout>

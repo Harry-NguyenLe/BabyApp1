@@ -64,7 +64,6 @@ public class NotificationTask {
         Notification notification = new NotificationCompat.Builder(context.getApplicationContext(), CHANNEL_ID)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setCustomContentView(remoteViews)
-                .setSound(Uri.parse("file:///android_assets/sound/soldier_alarm.mp3"))
                 .build();
 
         remoteViews.setTextViewText(R.id.tvNotiTittle, "Time is up");
