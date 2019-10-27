@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <com.joooonho.SelectableRoundedImageView
+        android:id="@+id/ivPassengerIcon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_baby" />
+
+    <TextView
+        android:id="@+id/tvPassengerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/ivPassengerIcon"
+        android:fontFamily="@font/font_uvn_baisau"
+        android:text="Passenger's name"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btnDeletePassenger"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/font_uvn_baisau"
+        android:text="@string/delete"
+        android:textAllCaps="false"
+        android:textColor="#F00D0D"
+        android:textSize="15sp"
+        android:textStyle="italic" />
+
+
+</RelativeLayout>

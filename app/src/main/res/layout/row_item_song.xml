@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/tvSongTittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/font_uvn_baisau"
+        android:text="Song Tittle"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="italic|bold" />
+
+    <CheckBox
+        android:id="@+id/ckbSong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:button="@drawable/checkbox_background"/>
+
+</RelativeLayout>
