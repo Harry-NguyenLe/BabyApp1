@@ -3,7 +3,6 @@ package adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,7 +78,6 @@ public class ChildAdapterRecycle extends RecyclerView.Adapter<ChildAdapterRecycl
             holder.ivChildImage.setImageBitmap(bitmap);
             holder.ivChildImage.setCornerRadiiDP(100f, 100f, 100f, 100f);
             holder.ivChildImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            holder.ivChildImage.setRotation(-90);
             holder.ivChildImage.isOval();
 
         }

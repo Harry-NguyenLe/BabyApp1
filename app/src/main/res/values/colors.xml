@@ -7,6 +7,8 @@
     <color name="colorButtonUnpress">#A2A2A2</color>
     <color name="colorButtonPress">#31F338</color>
 
+    <color name="background_dialog">#FFFFFF</color>
+
     <color name="colorTextviewAlarmTime">#073AF1</color>
 
 </resources>

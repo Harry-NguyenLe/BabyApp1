@@ -75,7 +75,6 @@ public class PassengerManagerAdapter extends RecyclerView.Adapter<PassengerManag
             holder.tvPassengerName.setText(child.getChildName());
             holder.ivPassengerIcon.setImageBitmap(bitmap);
             holder.ivPassengerIcon.setCornerRadiiDP(100f, 100f, 100f, 100f);
-            holder.ivPassengerIcon.setRotation(-90);
             holder.ivPassengerIcon.setScaleType(ImageView.ScaleType.CENTER_CROP);
             holder.ivPassengerIcon.isOval();
         }

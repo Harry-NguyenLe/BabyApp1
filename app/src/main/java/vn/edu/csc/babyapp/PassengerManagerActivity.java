@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 
 import adapter.PassengerManagerAdapter;
@@ -21,6 +23,7 @@ import model.Child;
 
 public class PassengerManagerActivity extends AppCompatActivity {
     ArrayList<Child> listChildren;
+    FloatingActionButton fabAddChild;
     DBHelper dbHelper;
     ImageButton imbBack;
     RecyclerView rvPassengerManager;
@@ -46,6 +49,7 @@ public class PassengerManagerActivity extends AppCompatActivity {
 
         rvPassengerManager = findViewById(R.id.rvPasssenger);
         imbBack = findViewById(R.id.imbBack);
+        fabAddChild = findViewById(R.id.fabAddChild);
     }
 
     private void initObjects() {
@@ -59,12 +63,14 @@ public class PassengerManagerActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 Bundle bundle = new Bundle();
 
-                bundle.putSerializable("listChild", listChildren);
-//                Log.d("ascwvnv", listChildren + " ListPassenger");
-
-                intent.putExtra("bundleChild", bundle);
-
-                setResult(RESULT_OK, intent);
+                if (listChildren != null) {
+                    bundle.putSerializable("listChild", listChildren);
+                    intent.putExtra("bundleChild", bundle);
+                    setResult(RESULT_OK, intent);
+                }
+                else {
+                    setResult(RESULT_CANCELED, intent);
+                }
                 finish();
             }
         });
@@ -82,6 +88,17 @@ public class PassengerManagerActivity extends AppCompatActivity {
                 bundle.putInt("CodeToChild", 0);
                 bundle.putInt("ChildID", position);
 
+                intent.putExtra("bundleChildID", bundle);
+                startActivityForResult(intent, REQ_CODE_PASSENGER);
+            }
+        });
+
+        fabAddChild.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PassengerManagerActivity.this, ChildActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("CodeToChild", 1);
                 intent.putExtra("bundleChildID", bundle);
                 startActivityForResult(intent, REQ_CODE_PASSENGER);
             }
@@ -106,7 +123,7 @@ public class PassengerManagerActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQ_CODE_PASSENGER && resultCode == RESULT_OK){
+        if (requestCode == REQ_CODE_PASSENGER && resultCode == RESULT_OK) {
             if (data != null) {
                 Bundle bundle = data.getExtras();
 
